@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+
+<!-- URDF of the single sliding block serving as the landing platform -->
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="moving_platform">
+
+
+    <!-- This is the fixed link that represents the world that we have -->
+    <link name="world"></link>
+
+    <!-- This is the fixed join linking the base link that will not be moving to our world -->
+    <joint name="slider_joint" type="prismatic">
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <parent link="world"/>
+        <child link="base_link"/>
+        <axis xyz="1 0.0 0.0"/>
+        <limit lower="0" upper="4" effort="10.0" velocity="100.0"/>
+    </joint>
+
+    <!-- Now i will create the base link that will not move and have the platform that is actually going to move on top of it -->
+
+    <link name="base_link">
+        <inertial>
+            <origin xyz="0.0 0.0 0.25" rpy="0.0 0.0 0.0"/>
+            <mass value="3"/>
+            <inertia ixx="0.3125" ixy="0" ixz="0.0" iyy="0.3125" iyz="0.0" izz="0.5"/>
+        </inertial>
+        <visual>
+            <origin xyz="0.0 0.0 0.25" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="1 1 0.5"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.25" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="1 1 0.5"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- defining the color of the base_link we created -->
+
+    <gazebo reference="base_link">
+        <material>Gazebo/Purple</material>
+    </gazebo>
+
+    <!-- adding the controller plugin -->
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/moving_landing_base</robotNamespace>
+        </plugin>
+    </gazebo>
+
+    <!-- The following is in order to be able to attach an actuator to the link tha we want to move -->
+    <!-- The transmisson element maps an actuator to the joint -->
+    <transmission name="world_to_base_trans">
+        <!-- The transmission type in here means that we are directly mapping the output of the controller to the joint -->
+        <type>transmission_interface/SimpleTransmission</type>
+        <actuator name="motor1">
+            <!-- This usually represents the reduction due to a gear box. In our case the reduction here is 1 meaning transmission ration of 1 -->
+            <mechanicalReduction>1</mechanicalReduction>
+            <!-- Now we are specifying the type of controller that will be attached -->
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </actuator>
+        <!-- Here we specify the join we want to apply this to, in my case it is slider_joint -->
+        <joint name="slider_joint">
+            <!-- This is the type of controller we want to implement -->
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+    </transmission>
+
+
+</robot>

@@ -1,0 +1,35 @@
+<launch>
+  <!-- Launch the landing_base_only.urdf as well as its controller in order to move it -->
+
+  <arg name="x" default="0" />
+  <arg name="y" default="0" />
+  <arg name="z" default="0" />
+  <arg name="model_name" default="landing_base" />
+  <arg name="enable_rviz" default="false" />
+
+  <!-- Loading the urdf model now and uploading it to the param server -->
+  <param name="robot_description" command="cat '$(find moving_platform)/description/$(arg model_name).urdf'"/>
+
+  <!-- Spawning the urdf model into the gazebo world that we have created -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-urdf -model platform -param robot_description -y $(arg y) -x $(arg x) -z $(arg z)" output="screen" /> 
+
+  <!-- load the controllers that we have declared in the yaml file-->
+  <rosparam file="$(find moving_platform)/config/$(arg model_name).yaml" command="load"/>
+
+  <!-- Load the controllers parameters for the joint positions and joint states -->
+  <node name="controller_spawner" pkg ="controller_manager" type="spawner" ns="moving_$(arg model_name)" args="slider_joint_position_controller joint_state_controller"/>
+
+  <!-- Load the robot_states_publisher in order to publish the tf transforms between the links -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+    <!-- We need to remap the topic that it is subscribed to in order for the namspace relevance to be correct.-->
+    <remap from="joint_states" to="/moving_$(arg model_name)/joint_states" />
+  </node>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find moving_platform)/config/platform_rviz.rviz" if="$(arg enable_rviz)" />
+ 
+  <!-- launching the node that moves the platform -->
+  <node name="platform_mover_node" pkg="moving_platform" type="move_platform.py"  >
+    <param name="model_name" value="$(arg model_name)"/>
+  </node>
+  
+</launch>

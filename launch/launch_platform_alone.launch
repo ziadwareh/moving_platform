@@ -1,0 +1,19 @@
+<launch>
+    <!-- This file launches the desired model alone -->
+    
+    <arg name="model_name" default="landing_base" />
+    <arg name="motion_type" default="fixed" />
+    <arg name="enable_rviz" default="false" />
+    <arg name="x" default="0" />
+    <arg name="y" default="0" />
+    <arg name="z" default="0" />
+
+    <include file="$(find moving_platform)/launch/$(arg motion_type)_platform.launch" >
+        <arg name="x" default="$(arg x)" />
+        <arg name="y" default="$(arg y)" />
+        <arg name="z" default="$(arg z)" />
+        <arg name="model_name" default="$(arg model_name)" />
+        <arg name="enable_rviz" default="$(arg enable_rviz)" />
+    </include>
+
+</launch>
