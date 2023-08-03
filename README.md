@@ -16,7 +16,7 @@ $ catkin_make #initialize your catkin_ws
 2. Clone the git repository
 ```
 $ cd ~/catkin_ws/src
-$ git clone
+$ git clone https://github.com/ziadwareh/moving_platform.git
 $ cd ..
 $ catkin_make
 ```
