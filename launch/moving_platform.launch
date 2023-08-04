@@ -11,7 +11,7 @@
   <param name="robot_description" command="cat '$(find moving_platform)/description/$(arg model_name).urdf'"/>
 
   <!-- Spawning the urdf model into the gazebo world that we have created -->
-  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-urdf -model platform -param robot_description -y $(arg y) -x $(arg x) -z $(arg z)" output="screen" /> 
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg model_name) -param robot_description -y $(arg y) -x $(arg x) -z $(arg z)" output="screen" /> 
 
   <!-- load the controllers that we have declared in the yaml file-->
   <rosparam file="$(find moving_platform)/config/$(arg model_name).yaml" command="load"/>
