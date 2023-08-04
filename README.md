@@ -1,10 +1,19 @@
 # moving_platform
 This ROS package enables you to spawn two types of platforms in Gazebo. The models are:
 * Landing_base
+
+  ![rsz_screenshot_from_2023-08-04_19-53-30](https://github.com/ziadwareh/moving_platform/assets/16977148/2239ef9b-a504-4e6d-8dcc-1448ccb9de80)
+
+
+  
 * Landing_station
+  
+  ![rsz_11screenshot_from_2023-08-04_19-52-49](https://github.com/ziadwareh/moving_platform/assets/16977148/94d84381-ed2b-4ea9-b5c7-a5ce1f09fb40)
+
   
 The landing_base consists of a block in Gazebo that serves as a landing base for a UAV. On the other hand, the Landing_station consists of both the base and a block it is attached to. This is just a variety of structures that can be utilized by the user. There are two modes for each platform:
 * moving
+  
 * fixed
 ## Installing Package
 1. If you do not have a catkin_ws setup then:
@@ -37,4 +46,4 @@ To launch the file with Gazebo:
 ```
 $ roslaunch moving_platform launch_platform_model_in_gazebo.launch model_name:=landing_station enable_rviz:=true motion_type:=moving x:=1 y:=1 z:=0
 ```
-> **Note** For the launch file without Gazebo replace `launch_platform_model_in_gazebo.launch` with `launch_platform_alone.launch`.
+> **Note:** For the launch file without Gazebo replace `launch_platform_model_in_gazebo.launch` with `launch_platform_alone.launch`.
