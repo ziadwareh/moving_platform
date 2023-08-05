@@ -40,7 +40,8 @@ There are two launch options, one that will launch Gazebo with it, and another t
 * x: x offset between urdf model origin and Gazebo origin. Default 0.
 * y: y offset between urdf model origin and Gazebo origin. Default 0.
 * z: z offset between urdf model origin and Gazebo origin. Default 0.
-* enable_rviz: true or false. This is to display urdf on rviz. default is false
+* enable_rviz: true or false. This is to display urdf on rviz. default is false.
+* move_command_rate: publish rate of the platform motion command. default is 10Hz.
 
 To launch the file with Gazebo:
 ```
