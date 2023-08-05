@@ -3,6 +3,7 @@
     
     <arg name="model_name" default="landing_base" />
     <arg name="motion_type" default="fixed" />
+    <arg name="move_command_rate" default="10" />
     <arg name="enable_rviz" default="false" />
     <arg name="x" default="0" />
     <arg name="y" default="0" />
@@ -14,6 +15,7 @@
         <arg name="z" default="$(arg z)" />
         <arg name="model_name" default="$(arg model_name)" />
         <arg name="enable_rviz" default="$(arg enable_rviz)" />
+        <arg name="move_command_rate" default="$(arg move_command_rate)" />
     </include>
 
 </launch>

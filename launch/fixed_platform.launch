@@ -6,6 +6,7 @@
   <arg name="z" default="0" />
   <arg name="model_name" default="landing_base" />
   <arg name="enable_rviz" default="false" />
+  <arg name="move_command_rate" default="0" />
 
   <!-- Loading the urdf model now and uploading it to the param server -->
   <param name="robot_description" command="cat '$(find moving_platform)/description/$(arg model_name).urdf'"/>

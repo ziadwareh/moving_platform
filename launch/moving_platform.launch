@@ -6,6 +6,7 @@
   <arg name="z" default="0" />
   <arg name="model_name" default="landing_base" />
   <arg name="enable_rviz" default="false" />
+  <arg name="move_command_rate" default="10" />
 
   <!-- Loading the urdf model now and uploading it to the param server -->
   <param name="robot_description" command="cat '$(find moving_platform)/description/$(arg model_name).urdf'"/>
@@ -30,6 +31,7 @@
   <!-- launching the node that moves the platform -->
   <node name="platform_mover_node" pkg="moving_platform" type="move_platform.py"  >
     <param name="model_name" value="$(arg model_name)"/>
+    <param name="publish_rate" value="$(arg move_command_rate)" />
   </node>
   
 </launch>

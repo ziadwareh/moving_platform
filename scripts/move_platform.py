@@ -9,10 +9,11 @@ def mover():
     rospy.init_node("platform_mover")
     rospy.loginfo("Mover node initiated")
     model_name = rospy.get_param('~model_name','default_value')
+    publish_rate = int(rospy.get_param('~publish_rate','default_value'))
     sleep(1)
     # making sure we publish on the topic that our controller is expected to recieve its set points
     platform_position_publisher = rospy.Publisher("/moving_{}/slider_joint_position_controller/command".format(model_name), Float64, queue_size=10)
-    rate = rospy.Rate(50) # 50 hz
+    rate = rospy.Rate(publish_rate)
     # This will be the value published as the desired position
     i = 0
     # Flag in order to toggle the incrementation of i
