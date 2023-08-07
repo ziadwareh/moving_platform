@@ -35,8 +35,9 @@ $ source ~/catkin_ws/devel/setup.bash
 ```
 >**Note:** If you ran into a "Could not load controller 'slider_joint_position_controller' because controller type 'effort_controllers/JointPositionController' does not exist." error, then this means that your installed ROS is missing its controllers' package. In order to install it simply run:
 >```
->$ sudo apt-get install ros-noetic-effort-controllers
+>$ sudo apt-get install ros-<ros-version>-effort-controllers
 >```
+>Be sure to change the <ros-version> parameter to match the version of ROS you are using ex: noetic
 ## Launching model
 There are two launch options, one that will launch Gazebo with it, and another that will not. Both files take 6 parameters:
 * model_name: Landing_base or Landing_station. Default is landing_base.
