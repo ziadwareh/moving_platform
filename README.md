@@ -37,7 +37,7 @@ $ source ~/catkin_ws/devel/setup.bash
 >```
 >$ sudo apt-get install ros-<ros-version>-effort-controllers
 >```
->Be sure to change the <ros-version> parameter to match the version of ROS you are using ex: noetic
+>Be sure to change the &lt;ros_version&gt; parameter to match the version of ROS you are using ex: noetic
 ## Launching model
 There are two launch options, one that will launch Gazebo with it, and another that will not. Both files take 6 parameters:
 * model_name: Landing_base or Landing_station. Default is landing_base.
